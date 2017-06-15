@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * @param view the view object
      */
     public void onSwipeLeftBtn(View view) {
-        if (mGlassDevice != null) {
+        if (mGlassDevice != null && mGlassDevice.getConnectionStatus() == GlassDevice.ConnectionStatus.CONNECTED) {
             mGlassDevice.swipeLeft();
         }
     }
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * @param view the view object
      */
     public void onSwipeRightBtn(View view) {
-        if (mGlassDevice != null) {
+        if (mGlassDevice != null && mGlassDevice.getConnectionStatus() == GlassDevice.ConnectionStatus.CONNECTED) {
             mGlassDevice.swipeRight();
         }
     }
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * @param view the view object
      */
     public void onSwipeDownBtn(View view) {
-        if (mGlassDevice != null) {
+        if (mGlassDevice != null && mGlassDevice.getConnectionStatus() == GlassDevice.ConnectionStatus.CONNECTED) {
             mGlassDevice.swipeDown();
         }
     }
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * @param view the view object
      */
     public void onTapBtn(View view) {
-        if (mGlassDevice != null) {
+        if (mGlassDevice != null && mGlassDevice.getConnectionStatus() == GlassDevice.ConnectionStatus.CONNECTED) {
             mGlassDevice.tap();
         }
     }
