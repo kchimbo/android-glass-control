@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GlassControl</string>
+
+    <string name="tap">Tap</string>
+    <string name="swipe_left">Swipe Left</string>
+    <string name="swipe_right">Swipe Right</string>
+    <string name="swipe_down">Swipe Down</string>
+
+    <string name="start_screencast">Start Screencast</string>
+    <string name="stop_screencast">Stop Screencast</string>
+
+
+    <string name="choose_glass">Choose Glass</string>
+    <string name="connection_status">Connection Status</string>
+    <string name="disconned">Disconnect</string>
+
+    <string name="no_devices_title">No paired devices</string>
+    <string name="no_devices_message">Glass must be paired before connecting</string>
+</resources>
