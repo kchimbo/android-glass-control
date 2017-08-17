@@ -110,18 +110,19 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * @param address the MAC address of Glass
      */
     private void connectGlassDevice(final String address) {
-        new AsyncTask<Void, Void, Boolean>() {
-            @Override
-            protected Boolean doInBackground(Void... params) {
-                mGlassDevice.connect(address);
-                return true;
-            }
-            @Override
-            protected void onPostExecute(Boolean result) {
-                updateGlassStatus(mGlassDevice.getConnectionStatus());
-                // Log.d(TAG, "connectGlassDevice() -> " + mGlassDevice.getConnectionStatus());
-            }
-        }.executeOnExecutor(sExecutorService);
+            new AsyncTask<Void, Void, Boolean>() {
+                @Override
+                protected Boolean doInBackground(Void... params) {
+                    mGlassDevice.connect(address);
+                    return true;
+                }
+
+                @Override
+                protected void onPostExecute(Boolean result) {
+                    updateGlassStatus(mGlassDevice.getConnectionStatus());
+                    // Log.d(TAG, "connectGlassDevice() -> " + mGlassDevice.getConnectionStatus());
+                }
+            }.executeOnExecutor(sExecutorService);
     }
 
     /**
