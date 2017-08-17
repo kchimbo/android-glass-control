@@ -28,28 +28,47 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import permissions.dispatcher.NeedsPermission;
+
 public class MainActivity extends AppCompatActivity implements GlassDevice.GlassConnectionListener {
 
-    public static final String TAG = "GlassControlActivity";
-
+    /**
+     * Logging tag
+     */
+    public static final String TAG = "MainActivity";
+    
     public static final int PERMISSION_BLUETOOTH = 1;
 
+    /**
+     * The Glass device
+     */
     private GlassDevice mGlassDevice;
 
-    private TextView mGlassStatus;
-
+    /**
+     * Show if the screencast is enabled or not.
+     */
     private boolean mScreencastEnabled = false;
 
+    /**
+     * Show if the Google Glass is currently connected;
+     */
     private static boolean mGlassConnected = false;
 
-    private ImageView mScreencastView;
-    private Button mStartScreencast;
+    @BindView(R.id.btnSwipeLeft) Button mSwipeLeftBtn;
+    @BindView(R.id.btnSwipeRight) Button mSwipeRightBtn;
+    @BindView(R.id.btnSwipeDown) Button mSwipeDownBtn;
+    @BindView(R.id.btnTap) Button mTapBtn;
+    @BindView(R.id.btnStartScreencast) Button mStartScreencast;
 
-    private Button mSwipeLeftBtn;
-    private Button mSwipeRightBtn;
-    private Button mSwipeDownBtn;
-    private Button mTapBtn;
+    @BindView(R.id.screenshot) ImageView mScreencastView;
 
+    @BindView(R.id.glass_status) TextView mGlassStatus;
+
+    /**
+     * Executor Service. Used to connect and disconnect from Glass asynchronously
+     */
     private static ExecutorService sExecutorService = Executors.newSingleThreadExecutor();
 
     @Override
@@ -62,21 +81,13 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
 
         mGlassDevice = new GlassDevice();
 
-        mSwipeLeftBtn       = (Button) findViewById(R.id.btnSwipeLeft);
-        mSwipeRightBtn      = (Button) findViewById(R.id.btnSwipeRight);
-        mSwipeDownBtn       = (Button) findViewById(R.id.btnSwipeDown);
-        mTapBtn             = (Button) findViewById(R.id.btnTap);
-        mStartScreencast    = (Button) findViewById(R.id.btnStartScreencast);
-
-        mGlassStatus = (TextView) findViewById(R.id.glass_status);
-
-        mScreencastView = (ImageView) findViewById(R.id.screenshot);
-
         mGlassDevice.registerListener(MainActivity.this);
 
         updateGlassStatus(mGlassDevice.getConnectionStatus());
 
         enableGlassControl(false);
+
+        ButterKnife.bind(this);
 
     }
 
@@ -161,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements GlassDevice.Glass
      * Connect or disconnect to Glass. The Glass must be previously paired with the phone.
      * @param view the view object
      */
+    @NeedsPermission({Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN})
     public void onChooseGlassClicked(View view) {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
