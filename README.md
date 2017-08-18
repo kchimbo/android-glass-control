@@ -1,5 +1,7 @@
 # Android Glass Control
 
+<img src="http://s3.taurine.io.s3.us-east-2.amazonaws.com/resize_glass-control.png" />
+
 Android Glass Control allow using an Android phone as an input interface to control the Google Glass
 swipe and tap gestures.
 
